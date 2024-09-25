@@ -1,0 +1,28 @@
+---
+- name: Update Docker Compose containers
+  hosts: all
+  become: true
+  tasks:
+    - name: Change to directory containing docker-compose.yml
+      ansible.builtin.command:
+        cmd: "cd /path/to/your/docker-compose-directory"
+      args:
+        chdir: /path/to/your/docker-compose-directory
+
+    - name: Pull the latest images for Docker Compose services
+      ansible.builtin.command:
+        cmd: "docker-compose pull"
+      args:
+        chdir: /path/to/your/docker-compose-directory
+
+    - name: Stop the running containers
+      ansible.builtin.command:
+        cmd: "docker-compose down"
+      args:
+        chdir: /path/to/your/docker-compose-directory
+
+    - name: Start the updated containers
+      ansible.builtin.command:
+        cmd: "docker-compose up -d"
+      args:
+        chdir: /path/to/your/docker-compose-directory
