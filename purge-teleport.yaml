@@ -1,0 +1,10 @@
+---
+- name: Purge teleport package
+  hosts: all
+  become: yes  # Use sudo
+  tasks:
+    - name: Purge teleport package
+      apt:
+        name: teleport
+        state: absent
+        purge: yes
