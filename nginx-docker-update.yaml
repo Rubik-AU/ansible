@@ -16,16 +16,16 @@
       ansible.builtin.shell: |
         cd /home/jszopko/nginx-proxy-manager
         docker compose pull
-      become_user: jszopko
+      become_user: root
 
     - name: Stop the running containers
       ansible.builtin.shell: |
         cd /home/jszopko/nginx-proxy-manager
         docker compose down
-      become_user: jszopko
+      become_user: root
 
     - name: Start the updated containers
       ansible.builtin.shell: |
         cd /home/jszopko/nginx-proxy-manager
         docker compose up -d
-      become_user: jszopko
+      become_user: root
