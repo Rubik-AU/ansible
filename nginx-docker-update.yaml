@@ -8,21 +8,25 @@
         cmd: "/home/jszopko/nginx-proxy-manager"
       args:
         chdir: /home/jszopko/nginx-proxy-manager
+      become_user: jszopko
 
     - name: Pull the latest images for Docker Compose services
       ansible.builtin.command:
         cmd: "docker-compose pull"
       args:
         chdir: /home/jszopko/nginx-proxy-manager
+      become_user: root
 
     - name: Stop the running containers
       ansible.builtin.command:
         cmd: "docker-compose down"
       args:
         chdir: /home/jszopko/nginx-proxy-manager
+      become_user: root
 
     - name: Start the updated containers
       ansible.builtin.command:
         cmd: "docker-compose up -d"
       args:
         chdir: /home/jszopko/nginx-proxy-manager
+      become_user: root
