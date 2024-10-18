@@ -8,7 +8,7 @@
         cmd: "/home/jszopko/nginx-proxy-manager"
       args:
         chdir: /home/jszopko/nginx-proxy-manager
-      become_user: jszopko
+      become_user: root
 
     - name: Pull the latest images for Docker Compose services
       ansible.builtin.command:
