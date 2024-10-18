@@ -3,30 +3,29 @@
   hosts: all
   become: true
   tasks:
-    - name: Change to directory containing docker-compose.yml
-      ansible.builtin.command:
-        cmd: "/home/jszopko/nginx-proxy-manager"
-      args:
-        chdir: /home/jszopko/nginx-proxy-manager
+    - name: Ensure correct permissions on the directory
+      ansible.builtin.file:
+        path: /home/jszopko/nginx-proxy-manager
+        state: directory
+        mode: '0755'
+        owner: jszopko
+        group: jszopko
       become_user: root
 
-    - name: Pull the latest images for Docker Compose services
-      ansible.builtin.command:
-        cmd: "docker-compose pull"
-      args:
-        chdir: /home/jszopko/nginx-proxy-manager
-      become_user: root
+    - name: Change to directory containing docker-compose.yml
+      ansible.builtin.shell: |
+        cd /home/jszopko/nginx-proxy-manager
+        docker-compose pull
+      become_user: jszopko
 
     - name: Stop the running containers
-      ansible.builtin.command:
-        cmd: "docker-compose down"
-      args:
-        chdir: /home/jszopko/nginx-proxy-manager
-      become_user: root
+      ansible.builtin.shell: |
+        cd /home/jszopko/nginx-proxy-manager
+        docker-compose down
+      become_user: jszopko
 
     - name: Start the updated containers
-      ansible.builtin.command:
-        cmd: "docker-compose up -d"
-      args:
-        chdir: /home/jszopko/nginx-proxy-manager
-      become_user: root
+      ansible.builtin.shell: |
+        cd /home/jszopko/nginx-proxy-manager
+        docker-compose up -d
+      become_user: jszopko
