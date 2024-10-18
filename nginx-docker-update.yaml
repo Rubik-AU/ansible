@@ -5,7 +5,7 @@
   tasks:
     - name: Change to directory containing docker-compose.yml
       ansible.builtin.command:
-        cmd: "cd /home/jszopko/nginx-proxy-manager"
+        cmd: "/home/jszopko/nginx-proxy-manager"
       args:
         chdir: /home/jszopko/nginx-proxy-manager
 
