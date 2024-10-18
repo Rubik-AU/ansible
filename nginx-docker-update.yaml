@@ -15,17 +15,17 @@
     - name: Change to directory containing docker-compose.yml
       ansible.builtin.shell: |
         cd /home/jszopko/nginx-proxy-manager
-        docker-compose pull
+        docker compose pull
       become_user: jszopko
 
     - name: Stop the running containers
       ansible.builtin.shell: |
         cd /home/jszopko/nginx-proxy-manager
-        docker-compose down
+        docker compose down
       become_user: jszopko
 
     - name: Start the updated containers
       ansible.builtin.shell: |
         cd /home/jszopko/nginx-proxy-manager
-        docker-compose up -d
+        docker compose up -d
       become_user: jszopko
