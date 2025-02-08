@@ -8,12 +8,15 @@
         project_src: /home/jszopko/kuma/docker-compose.yml  # Adjust this path
         pull: always
       register: compose_pull
+      become: true
 
     - name: Restart the Docker Compose application
       community.docker.docker_compose_v2:
         project_src: /home/jszopko/kuma/docker-compose.yml  # Adjust this path
         state: present
       when: compose_pull.changed
+      become: true
 
     - name: Remove unused Docker images
       command: docker image prune -f
+      become: true
