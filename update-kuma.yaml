@@ -6,7 +6,7 @@
     - name: Pull the latest images
       community.docker.docker_compose_v2:
         project_src: /home/jszopko/kuma/docker-compose.yml  # Adjust this path
-        pull: yes
+        pull: always
       register: compose_pull
 
     - name: Restart the Docker Compose application
