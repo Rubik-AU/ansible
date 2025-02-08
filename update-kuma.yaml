@@ -1,0 +1,19 @@
+---
+- name: Update Docker Compose App
+  hosts: all
+  become: true
+  tasks:
+    - name: Pull the latest images
+      community.docker.docker_compose:
+        project_src: /home/jszopko/kuma/docker-compose.yml  # Adjust this path
+        pull: yes
+      register: compose_pull
+
+    - name: Restart the Docker Compose application
+      community.docker.docker_compose:
+        project_src: /home/jszopko/kuma/docker-compose.yml  # Adjust this path
+        state: present
+      when: compose_pull.changed
+
+    - name: Remove unused Docker images
+      command: docker image prune -f
